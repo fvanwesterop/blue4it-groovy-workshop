@@ -1,0 +1,8 @@
+:source-highlighter: prettify
+
+= Blue4IT Groovy Workshop
+Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+- Clone the repository using the URL provided by the green button on the top-right.
+- Visit the https://fvanwesterop.github.io/blue4it-groovy-workshop/[workshop docs] and continue from there.
