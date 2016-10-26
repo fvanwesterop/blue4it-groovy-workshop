@@ -430,7 +430,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_2_1_running_groovy">2.1 Running Groovy</a>
 <ul class="sectlevel2">
 <li><a href="#_2_2_groovy_vanaf_de_commandline">2.2 Groovy vanaf de CommandLine</a></li>
-<li><a href="#_2_xx_creating_a_new_project">2.xx Creating a new Project</a></li>
 </ul>
 </li>
 </ul>
@@ -461,31 +460,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_2_2_1_de_groovy_shell">2.2.1 De Groovy Shell</h4>
 <div class="paragraph">
-<p>Heb je een machine waarop Groovy geinstalleerd is dan is ook de Groovy Shell bechikbaar. Je start deze met het commando <code>groovysh</code>. Persoonlijk vind ik dit geen prettig ding om te gebruiken: Hij is voor Groovy begrippen minder intuitief. Maar pak je de <a href="http://docs.groovy-lang.org/docs/next/html/documentation/tools-groovysh.html">documentatie</a> erbij dan kom je er wel uit. Voordelen zijn dat deze shell inderdaad interactief is en je dus een korte/directe feedback loop hebt. Dat maakt het bruikbaar voor snelle probeersels. Bovendien is Groovy Shell altijd beschikbaar wanneer Groovy beschikbaar is, zefs via een remote login. En er is ook geen setup nodig om hem te kunnen gebruiken. Kijk er zelf maar eens naar, en weet dat het ding bestaat. In de workshop gebruiken we verder handigere tools.</p>
+<p>Heb je een machine waarop Groovy geïnstalleerd is, dan is ook de Groovy Shell bechikbaar. Je start deze met het commando <code>groovysh</code>. Persoonlijk vind ik dit geen prettig ding om te gebruiken: Hij is voor Groovy begrippen minder intuitief. Maar pak je de <a href="http://docs.groovy-lang.org/docs/next/html/documentation/tools-groovysh.html">documentatie</a> erbij dan kom je er wel uit. Het is een nuttige tool om snel wat uit te proberen door de korte feedback loop die je hebt in zo&#8217;n shell en hij is altijd beschikbaar als Groovy zelf beschikbaar is. Maar er zijn handigere tools dus in deze workshop gebruiken we <code>groovysh</code> verder niet.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_2_2_2_groovy_shebang">2.2.2 Groovy Shebang</h4>
 <div class="paragraph">
-<p>Wanneer je een shell script bekijkt van een POSIX systeem (UNIX, Linux, OSX etc.) dan zie je dat deze altijd begint met de zogenaaamde "shebang line". Die eerste regel vertelt je shell (bash, zsh) welke interpretter deze moet gebruiken om je script uit te voeren. Vaak luid deze eerste regel <code><mark>!/bin/bash</code>. Maar in principe kun je hier iedere executable aangeven. Dus ook bijvoorbeeld een Ruby, Python of Groovy interpretter. Omdat deze niet op ieder systeem in dezelfde directory geinstalleerd of symlinked worden is het dan wel verstandig om de <code>env</code> utiity te gebruiken in je shebang line: <code></mark>!\usr\bin\env groovy</code>.</p>
+<p>Wanneer je een shell script bekijkt van een POSIX systeem (UNIX, Linux, OSX etc.) dan zie je dat deze altijd begint met de zogenaaamde shebang line, meestal <code>#!/bin/bash</code> of <code>#!/bin/sh</code>. Die shebang line vertelt je shell (bash, zsh) welke interpreter deze moet gebruiken om je script uit te voeren. Maar in principe kun je hier iedere executable aangeven. Op deze manier kun je bijvoorbeeld een Ruby, Python of Groovy script als shell script gebruiken. Maar omdat dit soort interpreters niet op ieder systeem op dezelfde plek geinstalleerd worden, is het verstandig om de <code>env</code> utiity te gebruiken om het volledige pad naar je script interpreter te resolven. Bijvoorbeeld: <code>#!\usr\bin\env groovy</code>.</p>
 </div>
-<div class="paragraph">
-<p>There are a number of ways you could run Groovy code which we will discuss here. For quick samples and scripts you could simply use vimtrying a quick</p>
-</div>
-<div class="paragraph">
-<p>throw-away sample you could use two flavors of interactive consoles: <code>groovysh</code> and <code>groovyConsole</code>. The latter is a Swing app written in Groovy itself. The former is a commandline app. Go ahead and start groovyConsole:</p>
-</div>
-<div id="app-listing" class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ groovyConsole</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2_xx_creating_a_new_project">2.xx Creating a new Project</h3>
-<div class="paragraph">
-<p>We will create a new Gradle project containing both Java and Groovy sources, including the Gradle <code>application plugin</code></p>
 </div>
 </div>
 </div>
@@ -493,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-26 11:13:08 +02:00
+Last updated 2016-10-26 15:03:54 +02:00
 </div>
 </div>
 </body>
