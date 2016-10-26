@@ -236,9 +236,8 @@ Find yourself a spot on your harddrive where you would like the workshop files t
 [source,bash]
 ----
 $ cd <workshop_parent_dir>
-$ git clone https://github.com/fvanwesterop/blue4it-groovy-workshop.git
-$ cd blue4it-groovy-workshop.git
-$ git checkout docs
+$ git clone https://github.com/fvanwesterop/blue4it-groovy-workshop.git blue4it-groovy-workshop
+$ cd blue4it-groovy-workshop
 ----
 
 === 1.9 Wrap Up
