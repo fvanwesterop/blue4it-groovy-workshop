@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+script_home=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+if [ -z "${script_home}" ]; then
+ exit 1
+fi
+cd ${script_home}/..
+
+git add --all && git commit -m "Publishing site." && git push
