@@ -1,0 +1,38 @@
+:source-highlighter: prettify
+:icons: font
+:toc-title:
+:toc: left
+
+= Blue4IT Groovy Workshop
+Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+[.text-right]
+https://fvanwesterop.github.io/blue4it-groovy-workshop/[Home] | https://github.com/fvanwesterop/blue4it-groovy-workshop.git[Repo] | http://docs.oracle.com/javase/8/docs/api/[JDK 8] | http://www.groovy-lang.org/gdk.html[GDK 2.4.7] | http://www.groovy-lang.org/api.html[API 2.4.7]
+
+== 2. Fun with Groovy and Scripting
+
+== 2.1 Running Groovy
+
+Je kunt op verschillende manieren met Groovy aan de slag, afhankelijk van of je snel even iets wil proberen, een script wil schrijven of een compleet project wil beginnen. We zullen er hier kort een paar proberen.
+
+=== 2.2 Groovy vanaf de CommandLine
+
+==== 2.2.1 De Groovy Shell
+Heb je een machine waarop Groovy geinstalleerd is dan is ook de Groovy Shell bechikbaar. Je start deze met het commando `groovysh`. Persoonlijk vind ik dit geen prettig ding om te gebruiken: Hij is voor Groovy begrippen minder intuitief. Maar pak je de http://docs.groovy-lang.org/docs/next/html/documentation/tools-groovysh.html[documentatie] erbij dan kom je er wel uit. Voordelen zijn dat deze shell inderdaad interactief is en je dus een korte/directe feedback loop hebt. Dat maakt het bruikbaar voor snelle probeersels. Bovendien is Groovy Shell altijd beschikbaar wanneer Groovy beschikbaar is, zefs via een remote login. En er is ook geen setup nodig om hem te kunnen gebruiken. Kijk er zelf maar eens naar, en weet dat het ding bestaat. In de workshop gebruiken we verder handigere tools.
+
+==== 2.2.2 Groovy Shebang
+
+Wanneer je een shell script bekijkt van een POSIX systeem (UNIX, Linux, OSX etc.) dan zie je dat deze altijd begint met de zogenaaamde "shebang line". Die eerste regel vertelt je shell (bash, zsh) welke interpretter deze moet gebruiken om je script uit te voeren. Vaak luid deze eerste regel `#!/bin/bash`. Maar in principe kun je hier iedere executable aangeven. Dus ook bijvoorbeeld een Ruby, Python of Groovy interpretter. Omdat deze niet op ieder systeem in dezelfde directory geinstalleerd of symlinked worden is het dan wel verstandig om de `env` utiity te gebruiken in je shebang line: `#!\usr\bin\env groovy`.
+
+There are a number of ways you could run Groovy code which we will discuss here. For quick samples and scripts you could simply use vimtrying a quick
+
+throw-away sample you could use two flavors of interactive consoles: `groovysh` and `groovyConsole`. The latter is a Swing app written in Groovy itself. The former is a commandline app. Go ahead and start groovyConsole:
+[[app-listing]]
+[source,bash]
+----
+$ groovyConsole
+----
+
+=== 2.xx Creating a new Project
+We will create a new Gradle project containing both Java and Groovy sources, including the Gradle `application plugin`

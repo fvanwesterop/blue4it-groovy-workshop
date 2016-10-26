@@ -1,0 +1,132 @@
+:source-highlighter: prettify
+:icons: font
+:toc-title:
+:toc: left
+
+= Blue4IT Groovy Workshop
+Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+[.text-right]
+https://fvanwesterop.github.io/blue4it-groovy-workshop/[Home] | https://github.com/fvanwesterop/blue4it-groovy-workshop.git[Repo] | http://docs.oracle.com/javase/8/docs/api/[JDK 8] | http://www.groovy-lang.org/gdk.html[GDK 2.4.7] | http://www.groovy-lang.org/api.html[API 2.4.7]
+
+== Notities
+
+=== Video's You might want to watch
+- *Devoxx Poland 2016* : https://www.youtube.com/watch?v=iJavq-nKT04[_Why I use Groovy and why I don't like it_] (Yuriy Chulovskyy)
+- *Spring One 2GX 2015* : https://www.infoq.com/presentations/groovy-java[_Seriously, Use Groovy NOW!_] (Ken Kousen)
+- *O'Reilly Training*: https://player.oreilly.com/videos/9781491930915[_Mastering Groovy Programming (inc. Spock)_] (Ken Kousen)
+
+
+==== Seriously, Use Groovy!
+
+Ken Kousen is the author of the book 'Making Java Groovy' _(Manning, 2013)_.
+
+He states he used to tell people:
+[quote]
+Hey you might consider Groovy, it's really helpfull
+
+After a few years he firmed that up to:
+
+[quote]
+Hey, you really should take a look at Groovy
+
+Nowadays he is more bold and just tells people:
+[quote]
+What is the problem, why aren't you using Groovy?
+
+Other JVM languages such as Closure, Scala have a big paradigm shift but Groovy blends right in with Java. You could introduce it gradually in your project shifting to Groovy more and more while keeping the good stuff from Java. So it is not like leaving Java for something completely else, say Scala or JRuby. However, Groovy has some very powerful features going well beyond what Java can do, eben Java 8
+Other things you can do with Java but are a lot simpler in Groovy with a more natural, more readable syntax and API.
+
+=== Groovy maakt triviale dingen die in Java 'gedoe' zijn simpel
+
+1. *Basic Stuff*
+- no `;` or `(`, `)`
+- Auto import of these packages and classes:
+	* `groovu.util`
+	* `groovy.lang`
+	* `java.util`
+	* `java.lang`
+	* `java.io`
+	* `java.net`
+	* `java.math.BigInteger`
+	* `java.math.Integer`
+- Properties and POGO's: standard private, while class is standard public
+- GStrings
+- Documentation
+	* Groovy JDK (GDK) API - Groovy's rewrite of selected parts of the JDK using metaprogramming
+	* Groovy API - The new API's Groovy brings to the party
+- Understand that Groovy uses method overloading extensively
+	* Demo `Math.abs` static method has been put into `Number` allowing suff like (-12).abs
+
+
+- Collections
+
+=== index operator:
+def persons = [p1, p2, p3]
+println presons; persons.class.name // is ArrayList, geen Person[]
+
+=== gebruik `as` keyword voor type coercion
+
+coerce naar Set interface geeft LinkedHashSet. Let op verwijdering duplicicates. Voeg @EqualsAndHashCode toe aan Person en nog meer duplicates verdwijnen
+
+//@EqualsAndHashCode
+class Person {
+    String first
+    def last
+}
+def p1 = new Person(first:'Stan', last:'van Westerop')
+def p2 =  new Person(first:'Stan', last:'van Westerop')
+def p3 = p1
+def persons = [p1, p2, p3] as Set
+print persons;  print ' '; println persons.class.name; println '' // duplcate p3 verwijderd; nu @EqualsAndHashCode toevoegen verwijderd ook p2 vanwege impl van equals
+
+def persons = [p1, p2, p3] as TreeSet  // deze coercing geeft sortering
+
+=== Groovy voegt krachtige zaken to ezoals builders
+
+Show off: def url = 'http://www.blue4it.nl'.toURL().getText() geeft een webpage terug :-)
+
+
+2. Meta Programming
+ * `methodMissing` method
+
+3. Closures
+
+4. Builders
+
+5. Testing
+	* with asserts
+		** Groovy Truth
+	* With GroovyTestCase
+	* With Spock
+
+
+
+
+=== Labs
+
+0. *Get Started*
+ - Install sdkman, groovy, gradle, lazybones
+ - Introduce Groovy Console
+
+1. *Basics*
+ - checkout trail-calendar project, branch 'domain-stuff'
+ - Have a look at Java files, compile and run with gradle
+ - Move to `src/main/groovy/*.groovy` files
+ - Remove all Java clutter
+ - Run groovy with gradle run
+
+2. *Closures*
+ - checkout trail-calendar project, branch 'closures'
+ - create a repository with collections, do stuf with finder methods
+ - introduce REST service?
+
+3. *Builders*
+ - checkout trail-calender project, branch 'builders'
+ - create rest client, introduce HTTP GET fiddle with the JsonBuilder printing to console
+
+4. *Testing*
+ - checkout trail-calender project, branch 'testing'
+ - do something with power asserts and GroovyTestCase (Unit3 based so must start with Test...)
+ - introduce Spock

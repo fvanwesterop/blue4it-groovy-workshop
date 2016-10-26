@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+script_home=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+if [ -z "${script_home}" ]; then
+ exit 1
+fi
+cd ${script_home}
+
+# Input directory containing site sources
+source_dir=../adoc
+
+# Output directory to publish to
+publish_dir=..
+
+
+
+# Remove all html from the publish dir
+find ${publish_dir} -type f -name "*.html" -exec rm {} \;
+
+# Generate html content
+find ${source_dir} -type f -name '*.adoc' -exec asciidoctorj -B ${source_dir} -D ${publish_dir} $(basename {}) \;
+
+# Replace all resources
+rm -rf ${publish_dir}/resources
+cp -r ${source_dir}/resources ${publish_dir}
+
+# Filter-out content we do not want published
+rm ${publish_dir}/00_*.html
+rm ${publish_dir}/99_*.html

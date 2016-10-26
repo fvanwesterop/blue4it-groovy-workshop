@@ -1,0 +1,16 @@
+<snippet>
+<content><![CDATA[${1:public} class ${2:className} {
+
+    public void ${3:go}() {
+		$0
+    }
+
+    public static void main(String[] argv) {
+    	new ${2:className}().${3:go}()
+    }
+}]]>
+</content>
+<tabTrigger>bootstrap-main-method</tabTrigger>
+<scope>source.groovy,source.java</scope>
+<description>Bootstrap class with main method</description>
+</snippet>

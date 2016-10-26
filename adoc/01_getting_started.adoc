@@ -1,0 +1,259 @@
+:source-highlighter: prettify
+:icons: font
+:toc-title:
+:toc: left
+
+= Blue4IT Groovy Workshop
+Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+[.text-right]
+https://fvanwesterop.github.io/blue4it-groovy-workshop/[Home] | https://github.com/fvanwesterop/blue4it-groovy-workshop.git[Repo] | http://docs.oracle.com/javase/8/docs/api/[JDK 8] | http://www.groovy-lang.org/gdk.html[GDK 2.4.7] | http://www.groovy-lang.org/api.html[API 2.4.7]
+
+== 1. Getting Started
+Welcome at our Groovy workshop! In order to get you started you first need to download and install Groovy itself and some handy tools to make live easier. After that we'll create a simple program to play with. Let's get started!
+
+=== 1.1 Installing SDKMan
+When you work on multiple projects simultaniously you already have encountered this: You need some language's SDK version `foo` for some project but SDK verion `bar` for that other project you're working on. Also you sometimes need that particular tool, but only for today and you'll want to forget about it afterwards. You do not want such a one-time usage tool to pollute your system, and possibly break something in the feature because of some obscure dependency clash, long after you forgot about it. So you write some little brittle scripts to make this back- and forth switching of your environment a little easier. Or worse: You sigh each time and do it manually. A Package manager is what you need!
+
+SDKMan is such a package manager. It started it's live as *Groovy enVironment Manager (GVM)*, but when it started to support version management of non-groovy stuff as well it was rebranded *Software Development Kit Manager (SDKMan)*. Go ahead and install it right now:
+
+[[app-listing]]
+[source,bash]
+----
+$ curl -s http://get.sdkman.io | bash
+----
+
+For a more full explaination of all commands available have a look at http://sdkman.io/usage.html[the online documentation]. For now we'll stick with the following short-list you'll need in the workshop:
+
+[[app-listing]]
+[source,bash]
+----
+sdk help               # Shows the basic commands. Take a minute to read what it all tells you here.
+
+sdk list <options>     # Lists all available packages available for installation,
+                       # or details on a specific one.
+
+sdk install <options>  # Installs a tool, framework or language SDK of either a specific version
+                       # or simply the latest-greatest one.
+
+sdk current            # Lists all installed packages and the current active versions.
+----
+
+=== 1.2 Browsing Available Packages
+Type the `sdk list` command without any options to show what's available for installation:
+[[app-listing]]
+[source,bash]
+----
+$ sdk list
+----
+The output is filtered through the `less` command so you can navigate using up- and down arrows and use `q` to exit. Notice that for instance the following programming languages are available for you: (wow!)
+
+- Ceylon
+- Groovy
+- Kotlin
+- Scala
+
+To show the available versions you use the `sdk list` command with the name of the package you are interested in. For example to list the Scala versions type:
+[[app-listing]]
+[source,bash]
+----
+$ sdk list scala
+----
+
+=== 1.3 Installing Groovy
+You will now install the latest version of Groovy. First have a look at the available versions:
+[app-listing]]
+[source,bash]
+----
+$ sdk list groovy
+----
+Notice the long list compared to the Scala versions. Now, when you just want the latest version you could use the `sdk install` command without specifying a version. However for this workshop we will make sure we'll be using version 2.4.7. So type the following command:
+[[app-listing]]
+[source,bash]
+----
+$ sdk install groovy 2.4.7
+----
+When downloading and installing completes SDKMan asks you whether your want this version to be the default version. Please confirm by pressing [enter].
+
+[TIP]
+====
+*Switching Versions* +
+When you install multiple versions of a package you can quickly switch back- and forth between versions using the `sdk use` command. For example when you also have installed Groovy 2.4.6 you could easily switch to it using:
+[[app-listing]]
+[source,bash]
+----
+$ sdk use groovy 2.4.6
+----
+You now work with that verion in the current shell only. To make the version switch persist you would use the following command instead:
+[[app-listing]]
+[source,bash]
+----
+$ sdk default groovy 2.4.6
+----
+====
+
+Now test your installation by performing a little smoke test:
+[[app-listing]]
+[source,bash]
+----
+$ groovy -e "println 'Hello, World!'"
+----
+This obviously should print the famous words `Hello, World!` to stdout of your console.
+
+=== 1.4 Installing Gradle
+
+In order make building, distributing and running our examples easy we probably want a build system. We could go for good-old maven, but to stay closer to the Groovy eco-system we will be using Gradle instead. Installation is a breeze with SDKMan. Just type:
+[[app-listing]]
+[source,bash]
+----
+$ sdk install gradle 3.1
+----
+Test drive your installation by simply type the command `gradle`. It will welcome you politely and display it's version.
+
+NOTE: Notice the line saying `Starting a Gradle Daemon`... This means Gradle spans it's own JVM in the backgroud and run inthere, always ready to build without delay. It has been said to shorten build times up to 75%. Gradle Daemon is enabled by default since Gradle version 3.0.
+
+=== 1.5 Installing GroovyServ
+When you run a Groovy script or application from the command-line, it's sources are compiled on the fly. This is different than Java, where compilation takes place in advance of running your code. This means more with Groovy there is more to be done on the spot and thus it takes longer to start compared to Java. To speed up things beyond what Java can do, we have GroovyServ. In analogy to the Gradle deamon, GroovyServ also boots a JVM in advance with the Groovy compiler stiing there already warming-up it's tires to smoke your Groovy sources whenever you're ready. Especially Groovy scripts benefit from this in a great deal. Also GroovyServ can be used to spead-up your write-code, run-tests, refactor -cycle. So let's have it:
+[[app-listing]]
+[source,bash]
+----
+$ sdk install groovyserv 1.1.0
+----
+GroovyServ exists of two parts: `groovyserv` and `groovyclient`. The server part obviously does he heavy lifting (keeping the JVM up and running and deploy your code on it). For standard use cases you will only need to interact with the client part. In fact you typically use it as a drop-in replacement for the `groovy`
+
+In order to start using GroovyServ you now need to initialize your installation once. Easiest way to do that is to just run the client part without any arguments and options:
+[[app-listing]]
+[source,bash]
+----
+$ groovyclient
+----
+[[app-listing]]
+[source,none]
+----
+Setup completed successfully for darwin_amd64.
+It's required only just after installation. Please run the same command once again.
+----
+
+[TIP]
+====
+In this modern distributed world you could even decide to run the server part on a disparate host. A use case might be to run the server on a Raspberry Pi when you are developing for that platform, while you comfortably use your favorite IDE or texteditor running together with the client part on your laptop. Or maybe you like to run the server part on a Docker instance somewhere in the network instead? It's up to you. Have a look at the https://kobo.github.io/groovyserv/userguide.html#remote-accessing[Remote accessing]-part of the https://kobo.github.io/groovyserv/[online documentation].
+====
+
+To smoke-test your GroovyServ installation you will perform a simple benchmark: You will run our previous 'hello world' example once again using the standard `groovy` command and compare it's running time with the same example using GroovyServ. For measuring elapsed time you will use the standard Unix utility `time`:
+[[app-listing]]
+[source,bash]
+----
+$ time groovy -e "println 'Hello, World!'"
+
+$ time groovyclient -e "println 'Hello, World!'"
+----
+
+You will see a big difference in speed between both commands. It should be easy to guess for you where the lion's share of this difference comes from...
+
+=== 1.6 Installing LazyBones
+
+The last peace of tooling that you'd like to use is LazyBones. It is a scaffolding tool that is usefull to quickly set-up the main directory structure for a Java or Groovy application. It's intention is the same as Maven's archetypes or Yeoman in the Javascript development community. Let's go:
+[[app-listing]]
+[source,bash]
+----
+$ sdk install lazybones 0.8.3
+----
+Smoke-test LazyBones and get a taste of it's usage by issuing the following commands:
+[[app-listing]]
+[source,bash]
+----
+$ lazybones
+$ lazybones list
+$ lazybones info groovy-app
+----
+
+=== 1.7 Installing Sublime Text
+When it comes to development environments everybody has his or her own preferences, opinions and ways of doing things. At the samen time when you are investigating and playing around with a new programming language you should not need much in respect to tooling to make your first steps. So in order to make sure everybody is on the same page I strongly suggest to all use the same editor. For that purpose I chose Sublime Text 3, which we will install next.
+
+==== 1.7.1 Installation
+Sublime Text is available for all major platforms. Have a quick look at their https://www.sublimetext.com/[site's frontpage] to get a first glance. I'm sure you will like this editor for all your small coding projects, bash script and html/css editong as well. Please follow detailed instructions for your platform below.
+
+===== OSX and Windows Platforms
+Simply install the appropriate installer from Sublime's https://www.sublimetext.com/3[download page] and run it.
+
+===== Linux platforms
+On Linux you could try installing with your platform's package manager (`yum`, `apt`, `yaourt` etc.) at the benefit of proper package management. On all Linux systems however, you should be fine with a generic install from the official tarball.
+
+====== +++<u>option a:</u>+++ Ubuntu and Derivatives Specific:
+Using a custom distribution hosted from the PPA of http://www.webupd8.org/p/about.html[WEB UPD8]:
+[[app-listing]]
+[source,bash]
+----
+$ sudo add-apt-repository ppa:webupd8team/sublime-text-3
+$ sudo apt-get update
+$ sudo apt-get install sublime-text-installer
+----
+
+====== +++<u>option b:</u>+++ All Linux Platforms:
+Using the official tarball distribution:
+[[app-listing]]
+[source,bash]
+----
+$ wget https://download.sublimetext.com/sublime_text_3_build_3126_x64.tar.bz2
+$ tar -xjvf sublime_text_3_build_3126_x64.tar.bz2 -C /opt
+$ sudo ln -s /opt/sublime_text_3/sublime_text /usr/local/bin/subl
+----
+You now should be able to start Sublime from the command line with the command `subl`. Optionally create a desktop entry by creating a file `sublime.desktop` in `~/.local/share/applications` with this contents:
+
+[[app-listing]]
+[source,bash]
+.file 'sublime.desktop':
+----
+[Desktop Entry]
+Name=Sublime Text
+Exec=subl %F
+MimeType=text/plain;
+Terminal=false
+Type=Application
+Icon=/opt/sublime_text_3/Icon/128x128/sublime-text.png
+Categories=Utility;TextEditor;Development;
+----
+
+==== 1.7.2 Configuration
+In order to run Groovy scripts or applications directly from within Sublime we need a 'Build System'-configuration. In order to do so go to the menu `Tools | Build System | New Build System...` Replace the file contents with the following:
+[[app-listing]]
+[source,bash]
+.file 'GroovyServ.sublime-build'
+----
+{
+	"cmd": ["groovyclient $file_name"],
+	"selector": "source.groovy",
+	"file_regex": "^(...?):([0-9]):?([0-9]*)",
+	"shell": true
+}
+----
+Save the file as `GroovyServ.sublime-build` in the directory Sublime suggests (typically `Packages/User/`). Close the file afterwards. You should now have a menu item `GroovyServ` in your `Tools | Build System` menu. Select it.
+
+=== 1.8 Clone the Workshop Sources
+Find yourself a spot on your harddrive where you would like the workshop files to reside. It will contain this documentation files and example source code you will build upon. Navigate to the desired parent directory and use git to clone my repository from GitHub:
+[[app-listing]]
+[source,bash]
+----
+$ cd <workshop_parent_dir>
+$ git clone https://github.com/fvanwesterop/blue4it-groovy-workshop.git
+$ cd blue4it-groovy-workshop.git
+$ git checkout docs
+----
+
+=== 1.9 Wrap Up
+To make sure you have all you need we'll ask SDKMan to sum it up for you. Make sure your list looks the same: That all packages are there and version numbers match up:
+[[app-listing]]
+[source,bash]
+----
+$ sdk current
+----
+[[app-listing]]
+[source,none]
+----
+Using:
+gradle: 3.1
+groovy: 2.1.9
+groovyserv: 1.1.0
+lazybones: 0.8.3
+----

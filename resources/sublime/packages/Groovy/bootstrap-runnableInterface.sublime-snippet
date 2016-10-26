@@ -1,0 +1,12 @@
+<snippet>
+<content><![CDATA[${1:public} class ${2:className} implements Runnable {
+
+    public void run() {
+		$0
+    }
+}]]>
+</content>
+<tabTrigger>bootstrap-runnable</tabTrigger>
+<scope>source.groovy</scope>
+<description>Bootstrap class with run method</description>
+</snippet>
