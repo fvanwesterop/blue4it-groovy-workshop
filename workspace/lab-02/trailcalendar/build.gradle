@@ -1,13 +1,49 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
-mainClassName = 'MainG'
+project.version = project_version
+project.sourceCompatibility = java_verion
+project.mainClassName = main_class_name
 
 repositories {
+    mavenLocal()
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4j_version}"
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${groovy_version}"
+    compile group: 'org.eclipse.jetty', name: 'jetty-server', version: "${jetty_version}"
+    compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: "${jetty_version}"
+    compile group: 'org.apache.ivy', name: 'ivy', version: '2.4.0'
+
+    runtime group: 'javax.servlet', name: 'javax.servlet-api', version: "${servlet_spec_version}"
+    runtime group: 'ch.qos.logback', name: 'logback-classic', version: "${logback_version}"
+
+    testCompile 'junit:junit:4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
+}
+
+sourceSets {
+    main {
+        groovy {
+            exclude 'gem-rest-service.groovy'
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': main_class_name)
+    }
 }

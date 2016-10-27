@@ -1,4 +1,4 @@
-package g
+package nl.blue4it.groovy.workshop.domain
 
 import groovy.transform.Canonical;
 
