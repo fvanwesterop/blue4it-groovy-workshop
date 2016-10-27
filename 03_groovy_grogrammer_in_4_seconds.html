@@ -429,6 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_3_groovy_programer_in_4_minutes">3. Groovy Programer in 4 Minutes</a>
 <ul class="sectlevel2">
 <li><a href="#_3_1_lab_01_trailcalendar">3.1 Lab-01: TrailCalendar</a></li>
+<li><a href="#_3_2_lab_02_trailcalendar_rest_service">3.2 Lab-02: TrailCalendar REST Service</a></li>
 </ul>
 </li>
 </ul>
@@ -566,12 +567,45 @@ class MainG {
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_3_2_lab_02_trailcalendar_rest_service">3.2 Lab-02: TrailCalendar REST Service</h3>
+<div class="sect3">
+<h4 id="_3_2_1_de_rest_service">3.2.1 De REST Service</h4>
+<div class="paragraph">
+<p>Ga naar de root van je workshop directory en checkout lab-02:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ cd &lt;workshop_home&gt;
+
+$ git checkout lab-02
+$ cd workspace/lab-02/trailcalendar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open de file <code>src/main/groovy/trailcalendar-rest-service.groovy</code> in Sublime en start de service, of navigeer naar <code>src/main/groovy</code> en start de service vanuit de shell met <code>groovyclient</code> of het <code>groovy</code> commando. Starten met <code>gradle run</code> werkt ook, maar het stoppen werkt dan minder goed.</p>
+</div>
+<div class="paragraph">
+<p>Ga naar <a href="http://localhost:4000/trailcalendar/findAll/">http://localhost:4000/trailcalendar/findAll/</a> en naar <a href="http://localhost:4000/trailcalendar/find/1">http://localhost:4000/trailcalendar/find/&lt;id&gt;</a> om de JSON output te bekijken.</p>
+</div>
+<div class="paragraph">
+<p>Open de andere sources in Sublime en bekijk hoe de service zo&#8217;n beetje werkt. Bekijk vervolgens <code>CalendarServlet</code>. De finder methods gebruiken een closure om de events op te halen.</p>
+</div>
+<div class="paragraph">
+<p>Pas de finders aan zodat de wrappers rond de event objectjes gestripped worden.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_2_2_de_rest_client">3.2.2 De REST Client</h4>
+
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-27 13:16:14 +02:00
+Last updated 2016-10-27 16:31:53 +02:00
 </div>
 </div>
 </body>

@@ -96,3 +96,28 @@ Ga nu weer naar je shell, build en run met Gradle: `gradle run`. Als de boel bou
 Ok, je hebt nu in feite een Java programma wat je als script kunt draaien. Ga maar naar de MainG class in Sublime en draai de app vauit Sublime. Je kunt wijzigingen aanbrengen en direct het resultaat zien zonder eerst te compileren; een volledige (Gradle) build is niet perse nodig. Je kunt zelfs een shebang line toevoegen in `MainG.groovy` en draaien als shell script.
 
 Op zich mooi, maar het is in feite gewoon Java code. Je krijgt instructies 'how to make Java more Groovy...'
+
+=== 3.2 Lab-02: TrailCalendar REST Service
+
+==== 3.2.1 De REST Service
+
+Ga naar de root van je workshop directory en checkout lab-02:
+
+[[app-listing]]
+[source,bash]
+----
+$ cd <workshop_home>
+
+$ git checkout lab-02
+$ cd workspace/lab-02/trailcalendar
+----
+
+Open de file `src/main/groovy/trailcalendar-rest-service.groovy` in Sublime en start de service, of navigeer naar `src/main/groovy` en start de service vanuit de shell met `groovyclient` of het `groovy` commando. Starten met `gradle run` werkt ook, maar het stoppen werkt dan minder goed.
+
+Ga naar http://localhost:4000/trailcalendar/findAll/[http://localhost:4000/trailcalendar/findAll/] en naar http://localhost:4000/trailcalendar/find/1[http://localhost:4000/trailcalendar/find/<id>] om de JSON output te bekijken.
+
+Open de andere sources in Sublime en bekijk hoe de service zo'n beetje werkt. Bekijk vervolgens `CalendarServlet`. De finder methods gebruiken een closure om de events op te halen.
+
+Pas de finders aan zodat de wrappers rond de event objectjes gestripped worden.
+
+==== 3.2.2 De REST Client
