@@ -426,9 +426,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#_3_groovy_programer_in_4_seconds">3. Groovy Programer in 4 Seconds</a>
+<li><a href="#_3_groovy_programer_in_4_minutes">3. Groovy Programer in 4 Minutes</a>
 <ul class="sectlevel2">
-<li><a href="#_3_1_trailcalendar">3.1 TrailCalendar</a></li>
+<li><a href="#_3_1_lab_01_trailcalendar">3.1 Lab-01: TrailCalendar</a></li>
 </ul>
 </li>
 </ul>
@@ -443,12 +443,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_groovy_programer_in_4_seconds">3. Groovy Programer in 4 Seconds</h2>
+<h2 id="_3_groovy_programer_in_4_minutes">3. Groovy Programer in 4 Minutes</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_3_1_trailcalendar">3.1 TrailCalendar</h3>
+<h3 id="_3_1_lab_01_trailcalendar">3.1 Lab-01: TrailCalendar</h3>
 <div class="paragraph">
-<p>Ga naar de root van je workshop directory voor <code>lab01</code>. We maken een simpele evenementen calender met cross-lopen, genaamd Trail Calendar.</p>
+<p>Je gaat een simpel evenementen calendertje met cross-lopen, genaamd Trail Calendar maken. Je begint met een Java programmaatje en bouwt dat om naar Groovy.</p>
+</div>
+<div class="sect3">
+<h4 id="_3_1_1_de_java_versie">3.1.1 De Java Versie</h4>
+<div class="paragraph">
+<p>Ga naar de root van je workshop directory om te beginnen:</p>
 </div>
 <div id="app-listing" class="listingblock">
 <div class="content">
@@ -479,13 +484,94 @@ dependencies {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Bouw en run het project met Gradle:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ gradle run</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Je zou nu een werkende Java versie van het programma moeten hebben. Op de console zie je dan output van twee evenementen. Bekijk de sources in Sublime.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_1_2_een_eerste_groovy_versie">3.1.2 Een Eerste Groovy Versie</h4>
+<div class="paragraph">
+<p>Probeer de main class <code>MainJ</code> te runnen vanuit Sublime met Groovy (sneltoets <code>Ctr-B</code> of <code>Cmd-B</code>). Dit werkt niet omdat het een Java file is. Dat gaan we oplossen.</p>
+</div>
+<div class="paragraph">
+<p>Navigeer in je shell naar de root van <code>lab01</code> en doe het volgende:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-language" data-lang="language"># Maak een groovy sources folder aan
+mkdir -p trailcalendar/src/main/groovy
+
+# Kopieer alle Java sources naar de Groovy folder
+cp -r trailcalendar/src/main/java/* trailcalendar/src/main/groovy
+
+# Hernoem alle Java sources en package in de Groovy Folder
+cd trailcalendar/src/main/groovy
+mv j g
+mv MainJ.java MainG.groovy
+cd g
+mv TrailCalendar.java TrailCalendar.groovy
+mv TrailEvent.java TrailEvent.groovy</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pas de build file <code>build.gradle</code> aan:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>De main-class heet nu <code>MainG</code></p>
+</li>
+<li>
+<p>Voeg de Groovy library toe: <code>compile 'org.codehaus.groovy:groovy-all:2.4.7'</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Open de file <code>MainG.groovy</code> in Sublime en pas de classname en imports aan:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">import g.TrailCalendar;
+import g.TrailEvent;
+
+(...)
+
+class MainG {
+
+(...)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open ook de files <code>TrailEvent.groovy</code> en <code>TrailCalendar.groovy</code> in Sublime en pas de package names aan.</p>
+</div>
+<div class="paragraph">
+<p>Ga nu weer naar je shell, build en run met Gradle: <code>gradle run</code>. Als de boel bouwt en draaid: Gefeliciteerd! Je kunt nu 'Groovy Programmer' aan je CV toevoegen!</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_1_3_groovy_nize">3.1.3 Groovy-nize&#8230;&#8203;</h4>
+<div class="paragraph">
+<p>Ok, je hebt nu in feite een Java programma wat je als script kunt draaien. Ga maar naar de MainG class in Sublime en draai de app vauit Sublime. Je kunt wijzigingen aanbrengen en direct het resultaat zien zonder eerst te compileren; een volledige (Gradle) build is niet perse nodig. Je kunt zelfs een shebang line toevoegen in <code>MainG.groovy</code> en draaien als shell script.</p>
+</div>
+<div class="paragraph">
+<p>Op zich mooi, maar het is in feite gewoon Java code. Je krijgt instructies 'how to make Java more Groovy&#8230;&#8203;'</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-27 12:21:56 +02:00
+Last updated 2016-10-27 13:16:14 +02:00
 </div>
 </div>
 </body>
