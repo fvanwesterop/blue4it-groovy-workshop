@@ -2,6 +2,7 @@
 :icons: font
 :toc-title:
 :toc: left
+:sourcedir: resources
 
 = Blue4IT Groovy Workshop
 Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
@@ -25,3 +26,85 @@ Heb je een machine waarop Groovy geïnstalleerd is, dan is ook de Groovy Shell b
 
 Wanneer je een shell script bekijkt van een POSIX systeem (UNIX, Linux, OSX etc.) dan zie je dat deze altijd begint met de zogenaaamde shebang line, meestal `\#!/bin/bash` of `#!/bin/sh`. Die shebang line vertelt je shell (bash, zsh) welke interpreter deze moet gebruiken om je script uit te voeren. Maar in principe kun je hier iedere executable aangeven. Op deze manier kun je bijvoorbeeld een Ruby, Python of Groovy script als shell script gebruiken. Maar omdat dit soort interpreters niet op ieder systeem op dezelfde plek geinstalleerd worden, is het verstandig om de `env` utiity te gebruiken om het volledige pad naar je script interpreter te resolven. Bijvoorbeeld: `#!\usr\bin\env groovy`.
 
+*Opdracht 1:*
+====
+Kopieer onderstaand voorbeeld naar een file, maak hem executeerbaar en voer hem uit:
+[[app-listing]]
+[source,bash]
+----
+$ vim example01.groovy
+## copy file contents and save
+----
+[[app-listing]]
+[source,groovy]
+.file: 'example01.groovy'
+----
+include::{sourcedir}/groovy/example01.groovy[]
+----
+[[app-listing]]
+[source,bash]
+----
+$ chmod +x example01.groovy
+$ ./example01.groovy
+----
+====
+Je hebt hiermee een krachtig alternatief voor bash scripts in handen. Bedenk daarbij ook dat je prima Java code kunt schrijven in zo'n Groovy script. Rechstreeks vanaf de commandline executeerbare Java code dus...
+
+==== 2.2.3 GroovyServ
+Wellicht viel je bij opdracht 1 op dat het script niet bijster snel werd uitgevoerd. Dit komt doordat eerst een Java VM gestart moet worden, waarop je script (in-memory) naar bytecode gecompileerd wordt en vervolgens uitgevoerd wordt. Met name dat starten van die VM kost natuurlijk wat tijd. Een oplossing hiervoor is GroovyServ. Deze houdt de VM draaiend als achtergrond proces en distribueerd je script of applicatie naar dit achtergrond proces voor compilatie en executie.
+
+*Opdracht 2:*
+====
+Pas de shebang-line van het script uit opdracht 1 aan zodat in plaats van `groovy` de tool `groovyclient` gebruikt wordt:
+[[app-listing]]
+[source,bash]
+----
+#!\usr\bin\env groovyclient
+----
+Voer het script minimaal 2x uit en kijk wat er gebeurd. Kijk ook even naar de uitvoer van het commando `groovyclient --help` en probeer het effect van de switch `-Ck` uit op het draaien van je script.
+====
+
+=== 2.3 Groovy vanuit de GUI
+Uiteraard kun je Groovy code ontwikkelen in een IDE zoals InteliJ IDEA, NetBeans of Eclipse. Wanneer je echter alleen maar een script wil schrijven dan is een goede editor vaak prettiger. Daarnaast komt Groovy zelf ook met een krachtige editor met extra mogelijkheden. We kijken naar deze twee opties.
+
+==== 2.3.1 De Groovy Console
+Wanneer je Groovy installeerd wordt naast de text-based utility `groovysh` ook de grafische utility Groovy Console geinstalleerd. Dit is een krachtige tool die behalve als editor o.a. ook als code inspector gebruikt kan worden. Dat laatste is heel handig omdat Groovy veel code decoreerd met gegenereerde code. Je kunt met Groovy Console zien wat er runtime toegevoegd wordt aan je zefgeschreven code.
+
+*Opdracht 3:*
+====
+Start Groovy Console...
+[[app-listing]]
+[source,bash]
+----
+$ groovyConsole &
+----
+...en kopieer onderstaand voorbeeld naar de editor van GroovyConsole:
+[[app-listing]]
+[source,groovy]
+.file: 'example02.groovy'
+----
+include::{sourcedir}/groovy/example02.groovy[]
+----
+Bekijk kort de http://groovy-lang.org/groovyconsole.html[documentatie]. Je kunt het script draaien met `Ctrl-R` (Windows en Linux) of `Cmd-R` (OSX).
+====
+
+*Opdracht 4:*
+====
+
+Open nu de AST Browser (Ctrl-T of Cmd-T, zie hoofdstuk 6 van de http://groovy-lang.org/groovyconsole.html[documentatie]). Bekijk de sourcecode van de class `Person` in de AST-browser. Let op de constructors en andere methods. Commentarieer de annotaties in de source code uit, refresh de AST-browser en bekijk telkens het resultaat
+====
+
+=== 2.4 Groovy vanuit je Favoriete Editor
+Veel editors hebben de mogelijkheid om externe programma's aan te roepen, bijvoorbeeld een compiler of interpreter. Wij zullen dat hier doen met Sublime Text.
+
+*Opdracht 5:*
+====
+Open sublime _vanaf de commandline_ en kopieer onderstaand voorbeeld in de editor:
+[[app-listing]]
+[source,groovy]
+.file: 'example03.groovy'
+----
+include::{sourcedir}/groovy/example03.groovy[]
+----
+Als Sublime goed geconfigureerd is kun je nu vanuit de editor de code compileren en draaien: Gebruik de shortcut `Ctrl-B` of `Cmd-B`. Gebeurt er niets check dan de build instellingen: menu `Tools | Build System`, er zou een vinkje moeten staan voor `Groovy`, `GroovyServ` of `Automatic`. Beide zouden moeten werken. Als je zowel een `Groovy` als `GroovyServ` menuitem hebt (omdat je beide build als build sytem had geconfigureerd) toggle dan eens tussen beide opties; GroovyServ is uiteraard veel sneller.
+====

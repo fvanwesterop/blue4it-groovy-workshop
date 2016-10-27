@@ -40,7 +40,7 @@ Other things you can do with Java but are a lot simpler in Groovy with a more na
 
 === Groovy maakt triviale dingen die in Java 'gedoe' zijn simpel
 
-1. *Basic Stuff*
+==== 1. *Basic Stuff*
 - no `;` or `(`, `)`
 - Auto import of these packages and classes:
 	* `groovu.util`
@@ -88,14 +88,14 @@ def persons = [p1, p2, p3] as TreeSet  // deze coercing geeft sortering
 Show off: def url = 'http://www.blue4it.nl'.toURL().getText() geeft een webpage terug :-)
 
 
-2. Meta Programming
+1. Meta Programming
  * `methodMissing` method
 
-3. Closures
+2. Closures
 
-4. Builders
+3. Builders
 
-5. Testing
+4. Testing
 	* with asserts
 		** Groovy Truth
 	* With GroovyTestCase
@@ -106,27 +106,27 @@ Show off: def url = 'http://www.blue4it.nl'.toURL().getText() geeft een webpage 
 
 === Labs
 
-0. *Get Started*
+1. *Get Started*
  - Install sdkman, groovy, gradle, lazybones
  - Introduce Groovy Console
 
-1. *Basics*
+2. *Basics*
  - checkout trail-calendar project, branch 'domain-stuff'
  - Have a look at Java files, compile and run with gradle
  - Move to `src/main/groovy/*.groovy` files
  - Remove all Java clutter
  - Run groovy with gradle run
 
-2. *Closures*
+3. *Closures*
  - checkout trail-calendar project, branch 'closures'
  - create a repository with collections, do stuf with finder methods
  - introduce REST service?
 
-3. *Builders*
+4. *Builders*
  - checkout trail-calender project, branch 'builders'
  - create rest client, introduce HTTP GET fiddle with the JsonBuilder printing to console
 
-4. *Testing*
+5. *Testing*
  - checkout trail-calender project, branch 'testing'
  - do something with power asserts and GroovyTestCase (Unit3 based so must start with Test...)
  - introduce Spock

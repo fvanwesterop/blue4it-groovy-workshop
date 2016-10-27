@@ -430,6 +430,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_2_1_running_groovy">2.1 Running Groovy</a>
 <ul class="sectlevel2">
 <li><a href="#_2_2_groovy_vanaf_de_commandline">2.2 Groovy vanaf de CommandLine</a></li>
+<li><a href="#_2_3_groovy_vanuit_de_gui">2.3 Groovy vanuit de GUI</a></li>
+<li><a href="#_2_4_groovy_vanuit_je_favoriete_editor">2.4 Groovy vanuit je Favoriete Editor</a></li>
 </ul>
 </li>
 </ul>
@@ -468,6 +470,168 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Wanneer je een shell script bekijkt van een POSIX systeem (UNIX, Linux, OSX etc.) dan zie je dat deze altijd begint met de zogenaaamde shebang line, meestal <code>#!/bin/bash</code> of <code>#!/bin/sh</code>. Die shebang line vertelt je shell (bash, zsh) welke interpreter deze moet gebruiken om je script uit te voeren. Maar in principe kun je hier iedere executable aangeven. Op deze manier kun je bijvoorbeeld een Ruby, Python of Groovy script als shell script gebruiken. Maar omdat dit soort interpreters niet op ieder systeem op dezelfde plek geinstalleerd worden, is het verstandig om de <code>env</code> utiity te gebruiken om het volledige pad naar je script interpreter te resolven. Bijvoorbeeld: <code>#!\usr\bin\env groovy</code>.</p>
 </div>
+<div class="paragraph">
+<p><strong>Opdracht 1:</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Kopieer onderstaand voorbeeld naar een file, maak hem executeerbaar en voer hem uit:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ vim example01.groovy
+## copy file contents and save</code></pre>
+</div>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="title">file: 'example01.groovy'</div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">#!/usr/bin/env groovy
+
+File f = new File('example01.groovy')
+
+f.readLines().indexed().collect { lineNr, line -&gt;
+	println "line $lineNr: $line"
+}</code></pre>
+</div>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ chmod +x example01.groovy
+$ ./example01.groovy</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Je hebt hiermee een krachtig alternatief voor bash scripts in handen. Bedenk daarbij ook dat je prima Java code kunt schrijven in zo&#8217;n Groovy script. Rechstreeks vanaf de commandline executeerbare Java code dus&#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_2_3_groovyserv">2.2.3 GroovyServ</h4>
+<div class="paragraph">
+<p>Wellicht viel je bij opdracht 1 op dat het script niet bijster snel werd uitgevoerd. Dit komt doordat eerst een Java VM gestart moet worden, waarop je script (in-memory) naar bytecode gecompileerd wordt en vervolgens uitgevoerd wordt. Met name dat starten van die VM kost natuurlijk wat tijd. Een oplossing hiervoor is GroovyServ. Deze houdt de VM draaiend als achtergrond proces en distribueerd je script of applicatie naar dit achtergrond proces voor compilatie en executie.</p>
+</div>
+<div class="paragraph">
+<p><strong>Opdracht 2:</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Pas de shebang-line van het script uit opdracht 1 aan zodat in plaats van <code>groovy</code> de tool <code>groovyclient</code> gebruikt wordt:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">#!\usr\bin\env groovyclient</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Voer het script minimaal 2x uit en kijk wat er gebeurd. Kijk ook even naar de uitvoer van het commando <code>groovyclient --help</code> en probeer het effect van de switch <code>-Ck</code> uit op het draaien van je script.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_3_groovy_vanuit_de_gui">2.3 Groovy vanuit de GUI</h3>
+<div class="paragraph">
+<p>Uiteraard kun je Groovy code ontwikkelen in een IDE zoals InteliJ IDEA, NetBeans of Eclipse. Wanneer je echter alleen maar een script wil schrijven dan is een goede editor vaak prettiger. Daarnaast komt Groovy zelf ook met een krachtige editor met extra mogelijkheden. We kijken naar deze twee opties.</p>
+</div>
+<div class="sect3">
+<h4 id="_2_3_1_de_groovy_console">2.3.1 De Groovy Console</h4>
+<div class="paragraph">
+<p>Wanneer je Groovy installeerd wordt naast de text-based utility <code>groovysh</code> ook de grafische utility Groovy Console geinstalleerd. Dit is een krachtige tool die behalve als editor o.a. ook als code inspector gebruikt kan worden. Dat laatste is heel handig omdat Groovy veel code decoreerd met gegenereerde code. Je kunt met Groovy Console zien wat er runtime toegevoegd wordt aan je zefgeschreven code.</p>
+</div>
+<div class="paragraph">
+<p><strong>Opdracht 3:</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Start Groovy Console&#8230;&#8203;</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ groovyConsole &amp;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;en kopieer onderstaand voorbeeld naar de editor van GroovyConsole:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="title">file: 'example02.groovy'</div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">import groovy.transform.*
+
+@ToString
+@TupleConstructor
+class Person {
+    def firstName
+    def lastName
+}
+
+def p = new Person('James', 'Gosling')
+
+println p</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bekijk kort de <a href="http://groovy-lang.org/groovyconsole.html">documentatie</a>. Je kunt het script draaien met <code>Ctrl-R</code> (Windows en Linux) of <code>Cmd-R</code> (OSX).</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Opdracht 4:</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Open nu de AST Browser (Ctrl-T of Cmd-T, zie hoofdstuk 6 van de <a href="http://groovy-lang.org/groovyconsole.html">documentatie</a>). Bekijk de sourcecode van de class <code>Person</code> in de AST-browser. Let op de constructors en andere methods. Commentarieer de annotaties in de source code uit, refresh de AST-browser en bekijk telkens het resultaat</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_4_groovy_vanuit_je_favoriete_editor">2.4 Groovy vanuit je Favoriete Editor</h3>
+<div class="paragraph">
+<p>Veel editors hebben de mogelijkheid om externe programma&#8217;s aan te roepen, bijvoorbeeld een compiler of interpreter. Wij zullen dat hier doen met Sublime Text.</p>
+</div>
+<div class="paragraph">
+<p><strong>Opdracht 5:</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Open sublime <em>vanaf de commandline</em> en kopieer onderstaand voorbeeld in de editor:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="title">file: 'example03.groovy'</div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">def leesplankje = ['aap', 'noot', 'mies', 'wim', 'zus', 'jet', 'teun']
+
+println '\nKlassieke Java-style for-loop:'
+for (int i = 0; i &lt; leesplankje.size(); i++) {
+	print '  '; println leesplankje[i];
+}
+
+println '\nHybride Java/Groovy-style for-loop met Groovy range:'
+for (String woord in leesplankje) {
+	print '  '; println woord
+
+}
+
+println '\nGroovy-style iteratie: each-method met closure'
+leesplankje.each() { woord -&gt;
+	print '  '; println woord
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Als Sublime goed geconfigureerd is kun je nu vanuit de editor de code compileren en draaien: Gebruik de shortcut <code>Ctrl-B</code> of <code>Cmd-B</code>. Gebeurt er niets check dan de build instellingen: menu <code>Tools | Build System</code>, er zou een vinkje moeten staan voor <code>Groovy</code>, <code>GroovyServ</code> of <code>Automatic</code>. Beide zouden moeten werken. Als je zowel een <code>Groovy</code> als <code>GroovyServ</code> menuitem hebt (omdat je beide build als build sytem had geconfigureerd) toggle dan eens tussen beide opties; GroovyServ is uiteraard veel sneller.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -475,7 +639,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-26 15:12:14 +02:00
+Last updated 2016-10-27 10:43:56 +02:00
 </div>
 </div>
 </body>

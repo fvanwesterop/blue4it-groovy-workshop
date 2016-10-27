@@ -474,7 +474,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="app-listing" class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk help               # Shows the basic commands. Take a minute to read what it all tells you here.
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk help               # Shows the basic commands. Take a minute to read what it all tells you
+                       # here.
 
 sdk list &lt;options&gt;     # Lists all available packages available for installation,
                        # or details on a specific one.
@@ -698,13 +699,42 @@ $ lazybones info groovy-app</code></pre>
 <p>Sublime Text is available for all major platforms. Have a quick look at their <a href="https://www.sublimetext.com/">site&#8217;s frontpage</a> to get a first glance. I&#8217;m sure you will like this editor for all your small coding projects, bash script and html/css editong as well. Please follow detailed instructions for your platform below.</p>
 </div>
 <div class="sect4">
-<h5 id="_osx_and_windows_platforms">OSX and Windows Platforms</h5>
+<h5 id="_on_apple_osx">On Apple OSX</h5>
 <div class="paragraph">
 <p>Simply install the appropriate installer from Sublime&#8217;s <a href="https://www.sublimetext.com/3">download page</a> and run it.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Sublime needs to be started from the commandline to make sure it inherits your path settings, so that it can find the Groovy executables because these are located in your home folder. In order to be able to do that OSX users should place the following little helper script preferably in your <code>~/bin</code> or <code>~/.local/bin</code> (which should be on your $PATH) or otherwise simply in your home folder:</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="title">file: 'subl'</div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">#!/bin/sh
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w $1 &amp;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also make sure the script is executable (adjust the path to yours):</p>
+</div>
+<div id="app-listing" class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ chmod +x ~/bin/subl</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
-<h5 id="_linux_platforms">Linux platforms</h5>
+<h5 id="_on_linux">On Linux</h5>
 <div class="paragraph">
 <p>On Linux you could try installing with your platform&#8217;s package manager (<code>yum</code>, <code>apt</code>, <code>yaourt</code> etc.) at the benefit of proper package management. On all Linux systems however, you should be fine with a generic install from the official tarball.</p>
 </div>
@@ -734,20 +764,7 @@ $ sudo ln -s /opt/sublime_text_3/sublime_text /usr/local/bin/subl</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You now should be able to start Sublime from the command line with the command <code>subl</code>. Optionally create a desktop entry by creating a file <code>sublime.desktop</code> in <code>~/.local/share/applications</code> with this contents:</p>
-</div>
-<div id="app-listing" class="listingblock">
-<div class="title">file 'sublime.desktop':</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">[Desktop Entry]
-Name=Sublime Text
-Exec=subl %F
-MimeType=text/plain;
-Terminal=false
-Type=Application
-Icon=/opt/sublime_text_3/Icon/128x128/sublime-text.png
-Categories=Utility;TextEditor;Development;</code></pre>
-</div>
+<p>You now should be able to start Sublime from the command line with the command <code>subl</code>.</p>
 </div>
 </div>
 </div>
@@ -770,6 +787,22 @@ Categories=Utility;TextEditor;Development;</code></pre>
 </div>
 <div class="paragraph">
 <p>Save the file as <code>GroovyServ.sublime-build</code> in the directory Sublime suggests (typically <code>Packages/User/</code>). Close the file afterwards. You should now have a menu item <code>GroovyServ</code> in your <code>Tools | Build System</code> menu. Select it.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you also want to be able to use the normal Groovy interpreter, instead or next to GroovyServ, make a copy of above file (or replace it if you don&#8217;t want to use GroovyServ) with these adjustments:
+- Replace <code>groovyclient</code> for <code>groovy</code> in the <code>cmd</code>-String
+- Name the file <code>Groovy.sublime-build</code></p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -811,7 +844,7 @@ lazybones: 0.8.3</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-26 15:19:25 +02:00
+Last updated 2016-10-27 10:38:40 +02:00
 </div>
 </div>
 </body>

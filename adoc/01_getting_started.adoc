@@ -29,7 +29,8 @@ For a more full explaination of all commands available have a look at http://sdk
 [[app-listing]]
 [source,bash]
 ----
-sdk help               # Shows the basic commands. Take a minute to read what it all tells you here.
+sdk help               # Shows the basic commands. Take a minute to read what it all tells you
+                       # here.
 
 sdk list <options>     # Lists all available packages available for installation,
                        # or details on a specific one.
@@ -174,10 +175,28 @@ When it comes to development environments everybody has his or her own preferenc
 ==== 1.7.1 Installation
 Sublime Text is available for all major platforms. Have a quick look at their https://www.sublimetext.com/[site's frontpage] to get a first glance. I'm sure you will like this editor for all your small coding projects, bash script and html/css editong as well. Please follow detailed instructions for your platform below.
 
-===== OSX and Windows Platforms
+===== On Apple OSX
 Simply install the appropriate installer from Sublime's https://www.sublimetext.com/3[download page] and run it.
 
-===== Linux platforms
+[WARNING]
+====
+Sublime needs to be started from the commandline to make sure it inherits your path settings, so that it can find the Groovy executables because these are located in your home folder. In order to be able to do that OSX users should place the following little helper script preferably in your `~/bin` or `~/.local/bin` (which should be on your $PATH) or otherwise simply in your home folder:
+[[app-listing]]
+[source,bash]
+.file: 'subl'
+----
+#!/bin/sh
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w $1 &
+----
+Also make sure the script is executable (adjust the path to yours):
+[[app-listing]]
+[source,bash]
+----
+$ chmod +x ~/bin/subl
+----
+====
+
+===== On Linux
 On Linux you could try installing with your platform's package manager (`yum`, `apt`, `yaourt` etc.) at the benefit of proper package management. On all Linux systems however, you should be fine with a generic install from the official tarball.
 
 ====== +++<u>option a:</u>+++ Ubuntu and Derivatives Specific:
@@ -199,21 +218,7 @@ $ wget https://download.sublimetext.com/sublime_text_3_build_3126_x64.tar.bz2
 $ tar -xjvf sublime_text_3_build_3126_x64.tar.bz2 -C /opt
 $ sudo ln -s /opt/sublime_text_3/sublime_text /usr/local/bin/subl
 ----
-You now should be able to start Sublime from the command line with the command `subl`. Optionally create a desktop entry by creating a file `sublime.desktop` in `~/.local/share/applications` with this contents:
-
-[[app-listing]]
-[source,bash]
-.file 'sublime.desktop':
-----
-[Desktop Entry]
-Name=Sublime Text
-Exec=subl %F
-MimeType=text/plain;
-Terminal=false
-Type=Application
-Icon=/opt/sublime_text_3/Icon/128x128/sublime-text.png
-Categories=Utility;TextEditor;Development;
-----
+You now should be able to start Sublime from the command line with the command `subl`.
 
 ==== 1.7.2 Configuration
 In order to run Groovy scripts or applications directly from within Sublime we need a 'Build System'-configuration. In order to do so go to the menu `Tools | Build System | New Build System...` Replace the file contents with the following:
@@ -229,6 +234,12 @@ In order to run Groovy scripts or applications directly from within Sublime we n
 }
 ----
 Save the file as `GroovyServ.sublime-build` in the directory Sublime suggests (typically `Packages/User/`). Close the file afterwards. You should now have a menu item `GroovyServ` in your `Tools | Build System` menu. Select it.
+[TIP]
+====
+When you also want to be able to use the normal Groovy interpreter, instead or next to GroovyServ, make a copy of above file (or replace it if you don't want to use GroovyServ) with these adjustments:
+- Replace `groovyclient` for `groovy` in the `cmd`-String
+- Name the file `Groovy.sublime-build`
+====
 
 === 1.8 Clone the Workshop Sources
 Find yourself a spot on your harddrive where you would like the workshop files to reside. It will contain this documentation files and example source code you will build upon. Navigate to the desired parent directory and use git to clone my repository from GitHub:
