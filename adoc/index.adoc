@@ -10,3 +10,4 @@ https://fvanwesterop.github.io/blue4it-groovy-workshop/[Home] | https://github.c
 == Table of Contents
 === <<01_getting_started.adoc#, 1. Getting Started>>
 === <<02_fun_with_groovy_and_scripting.adoc#, 2. Fun with Groovy and Scripting>>
+=== <<03_groovy_grogrammer_in_4_seconds.adoc#, 3. Groovy Programer in 4 Seconds>>

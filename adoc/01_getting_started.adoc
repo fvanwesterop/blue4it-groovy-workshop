@@ -112,7 +112,7 @@ $ sdk install gradle 3.1
 ----
 Test drive your installation by simply type the command `gradle`. It will welcome you politely and display it's version.
 
-NOTE: Notice the line saying `Starting a Gradle Daemon`... This means Gradle spans it's own JVM in the backgroud and run inthere, always ready to build without delay. It has been said to shorten build times up to 75%. Gradle Daemon is enabled by default since Gradle version 3.0.
+NOTE: Notice the line saying `Starting a Gradle Daemon`... This means Gradle spans it's own JVM in the backgroud and run in there, always ready to build without delay. It has been said to shorten build times up to 75%. Gradle Daemon is enabled by default since Gradle version 3.0.
 
 === 1.5 Installing GroovyServ
 When you run a Groovy script or application from the command-line, it's sources are compiled on the fly. This is different than Java, where compilation takes place in advance of running your code. This means more with Groovy there is more to be done on the spot and thus it takes longer to start compared to Java. To speed up things beyond what Java can do, we have GroovyServ. In analogy to the Gradle deamon, GroovyServ also boots a JVM in advance with the Groovy compiler stiing there already warming-up it's tires to smoke your Groovy sources whenever you're ready. Especially Groovy scripts benefit from this in a great deal. Also GroovyServ can be used to spead-up your write-code, run-tests, refactor -cycle. So let's have it:

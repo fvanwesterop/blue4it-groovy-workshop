@@ -1,0 +1,34 @@
+:source-highlighter: prettify
+:icons: font
+:toc-title:
+:toc: left
+:sourcedir: resources
+
+= Blue4IT Groovy Workshop
+Frank van Westerop <https://github.com/fvanwesterop[@fvanwesterop]>; Gijs Mollema <https://github.com/gmollema[@gmollema]>
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+[.text-right]
+https://fvanwesterop.github.io/blue4it-groovy-workshop/[Home] | https://github.com/fvanwesterop/blue4it-groovy-workshop.git[Repo] | http://docs.oracle.com/javase/8/docs/api/[JDK 8] | http://www.groovy-lang.org/gdk.html[GDK 2.4.7] | http://www.groovy-lang.org/api.html[API 2.4.7]
+
+== 3. Groovy Programer in 4 Seconds
+
+
+=== 3.1 TrailCalendar
+Ga naar de root van je workshop directory voor `lab01`. We maken een simpele evenementen calender met cross-lopen, genaamd Trail Calendar.
+[[app-listing]]
+[source,bash]
+----
+$ cd <workshop_home>
+
+$ git checkout lab-01
+$ cd workspace/lab-01/trailcalendar
+$ gradle init
+----
+Vervang de inhoud van de file `build.gradle` met de volgende inhoud:
+[[app-listing]]
+[source,groovy]
+.file: 'build.gradle'
+----
+include::{sourcedir}/labs/lab-01/build.gradle[]
+----
